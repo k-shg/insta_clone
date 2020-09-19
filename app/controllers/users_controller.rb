@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: 'ユーザーを作成しました'
+      redirect_to root_path, danger: 'ユーザーを作成しました'
     else
-      render 'new'
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
+      render 'new'
     end
   end
 
