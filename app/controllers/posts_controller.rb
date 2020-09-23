@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_login, only: %i[new create edit update destroy]
+
   def index
     @posts = Post.all.includes(:user).order(created_at: :desc)
   end
@@ -19,7 +21,6 @@ class PostsController < ApplicationController
     else
       flash.now[:danger] = '投稿に失敗しました'
       render 'new'
-      
     end
   end
 
