@@ -1,6 +1,14 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+@import 'swiper/swiper-bundle';
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 
 body {
   position: relative;
@@ -92,4 +100,12 @@ img {
       }
     }
   }
+}
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }

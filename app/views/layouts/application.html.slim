@@ -15,3 +15,5 @@ html
   = render 'shared/flash_messages'
   main
     = yield
+  - if Rails.env.development?
+    = debug(params)
