@@ -35,12 +35,15 @@ gem 'redis-rails'
 gem 'jquery-rails'
 gem 'popper_js'
 gem 'annotate'
+gem 'font-awesome-sass'
+gem 'carrierwave'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker'
 end
 
 group :development do

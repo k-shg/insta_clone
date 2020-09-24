@@ -8,6 +8,12 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   body
+  - if logged_in?
     = render 'shared/header'
-    = render 'shared/flash_messages'
+  - else
+    = render 'shared/before_login_header'
+  = render 'shared/flash_messages'
+  main
     = yield
+  - if Rails.env.development?
+    = debug(params)
