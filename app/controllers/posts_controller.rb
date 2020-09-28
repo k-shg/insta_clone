@@ -11,6 +11,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.order(created_at: :desc)
+    @comment = Comment.new
   end
 
   def create
@@ -43,8 +45,10 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy!
-    redirect_to posts_path
+    redirect_to posts_path, success: '投稿を削除しました'
   end
+
+  private
 
   def post_params
     params.require(:post).permit(:body, images: [])
