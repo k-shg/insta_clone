@@ -13,9 +13,6 @@
          .card-header
            | ユーザー
          .card-body
-          - User.all.each do |user|
-           .user.mb-3
-             = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-             = user.username
+          = render @users
          .card-footer
-           = link_to 'すべて見る', '#'
+          = link_to 'すべて見る', users_path

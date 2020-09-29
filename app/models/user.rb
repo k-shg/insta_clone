@@ -29,6 +29,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
 
+  scope :recent, ->(count) { order(id: :desc).limit(count) }
+
   def own?(object)
     id == object.user_id
   end
