@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
   root 'posts#index'
   resources :users, only: %i[index new create show]
   resources :posts, shallow: true do
