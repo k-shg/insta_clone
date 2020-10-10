@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all.page(params[:page]).order(id: :desc)
+    @users = User.all.page(params[:page]).order(created_at: :desc)
   end
 
   def new
@@ -10,10 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, danger: 'ユーザーを作成しました'
+      auto_login(@user)
+      redirect_to login_path, success: 'ユーザーを作成しました'
     else
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
-      render 'new'
+      render :new
     end
   end
 
@@ -24,6 +25,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :username)
   end
 end
