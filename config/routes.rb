@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     mount Sidekiq::Web, at: '/sidekiq'
   end
   root 'posts#index'
+
+  get 'login', to: 'user_sessions#new'
+  post 'login', to: 'user_sessions#create'
+  delete 'logout', to: 'user_sessions#destroy'
+
   resources :users, only: %i[index new create show]
   resources :posts, shallow: true do
     collection do
@@ -19,13 +24,13 @@ Rails.application.routes.draw do
     patch :read, on: :member
   end
 
+  resources :chatrooms, only: %i[index create show], shallow: true do
+    resources :messages
+  end
+
   namespace :mypage do
     resource :account, only: %i[edit update]
     resources :activities, only: %i[index]
     resource :notification_setting, only: %i[edit update]
   end
-
-  get 'login', to: 'user_sessions#new'
-  post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
 end
